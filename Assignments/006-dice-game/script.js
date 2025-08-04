@@ -1,57 +1,100 @@
 'use strict';
 
+// Selecting elements
+const player0El = document.querySelector('.player--0');
+const player1El = document.querySelector('.player--1');
 const score0El = document.getElementById('score--0');
 const score1El = document.getElementById('score--1');
-const dice = document.querySelector('.dice');
-const currentScore0El = document.getElementById('current--0');
-const currentScore1El = document.getElementById('current--1');
-let currentPlayer = currentScore0El;
+const current0El = document.getElementById('current--0');
+const current1El = document.getElementById('current--1');
 
-score0El.textContent = 0;
-score1El.textContent = 0;
-dice.classList.add('hidden');
+const diceEl = document.querySelector('.dice');
+const btnNew = document.querySelector('.btn--new');
+const btnRoll = document.querySelector('.btn--roll');
+const btnHold = document.querySelector('.btn--hold');
 
-const resetGame = function () {
-  currentPlayer = currentScore0El;
+let scores, currentScore, activePlayer, playing;
+
+// Starting conditions
+const init = function () {
+  scores = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+
   score0El.textContent = 0;
   score1El.textContent = 0;
-  dice.classList.add('hidden');
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+
+  diceEl.classList.add('hidden');
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+};
+init();
+
+const switchPlayer = function () {
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  currentScore = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
 };
 
-const rolldice = function () {
-  const diceRollScore = Math.trunc(Math.random() * 6) + 1;
-  dice.classList.remove('hidden');
-  dice.setAttribute('src', `dice-${diceRollScore}.png`);
-  if (diceRollScore != 1) {
-    currentPlayer.textContent =
-      Number(currentPlayer.textContent) + diceRollScore;
-  } else {
-    if (currentPlayer == currentScore0El) {
-      score0El.textContent =
-        Number(score0El.textContent) + Number(currentPlayer.textContent);
-      if (Number(score0El.textContent) >= 100) {
-        console.log('Current Player wins');
-      }
-      currentPlayer.textContent = 0;
-      currentPlayer = currentScore1El;
-      document.querySelector('.player--0').classList.remove('player--active');
-      document.querySelector('.player--1').classList.add('player--active');
+// Rolling dice functionality
+btnRoll.addEventListener('click', function () {
+  if (playing) {
+    // 1. Generating a random dice roll
+    const dice = Math.trunc(Math.random() * 6) + 1;
+
+    // 2. Display dice
+    diceEl.classList.remove('hidden');
+    diceEl.src = `dice-${dice}.png`;
+
+    // 3. Check for rolled 1
+    if (dice !== 1) {
+      // Add dice to current score
+      currentScore += dice;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore;
     } else {
-      score1El.textContent =
-        Number(score1El.textContent) + Number(currentPlayer.textContent);
-      if (Number(score0El.textContent) >= 100) {
-        console.log('Current Player wins');
-      }
-      currentPlayer.textContent = 0;
-      currentPlayer = currentScore0El;
-      document.querySelector('.player--0').classList.add('player--active');
-      document.querySelector('.player--1').classList.remove('player--active');
+      document.getElementById(`score--${activePlayer}`).textContent =
+        Number(document.getElementById(`score--${activePlayer}`).textContent) +
+        currentScore;
+      // Switch to next player
+      switchPlayer();
     }
   }
-};
+});
 
-const holdDice = function () {};
+btnHold.addEventListener('click', function () {
+  if (playing) {
+    // 1. Add current score to active player's score
+    scores[activePlayer] += currentScore;
+    // scores[1] = scores[1] + currentScore
 
-document.querySelector('.btn--new').addEventListener('click', resetGame);
-document.querySelector('.btn--roll').addEventListener('click', rolldice);
-document.querySelector('.btn--hold').addEventListener('click', holdDice);
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
+
+    // 2. Check if player's score is >= 100
+    if (scores[activePlayer] >= 100) {
+      // Finish the game
+      playing = false;
+      diceEl.classList.add('hidden');
+
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+    } else {
+      // Switch to the next player
+      switchPlayer();
+    }
+  }
+});
+
+btnNew.addEventListener('click', init);
