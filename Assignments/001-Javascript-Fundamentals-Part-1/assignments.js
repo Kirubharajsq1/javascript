@@ -10,6 +10,7 @@ let salary = null; //Null
 //Symbol 
 //  Big Int
 
+//Objects
 let education = [
   "sengunthar matric higher secondary school",
   "sengunthar college of engineering",
