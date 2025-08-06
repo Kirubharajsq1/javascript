@@ -32,19 +32,137 @@ const restaurant = {
       `Order received! ${this.starterMenu[starterMenuIndex]} and ${this.mainMenu[mainMenuIndex]} will be delivered to ${address} at ${time}`
     );
   },
+  orderPizza: function (mainIngredient, ...otherIngredient) {
+    console.log(mainIngredient);
+    console.log(otherIngredient);
+  },
 };
 
-restaurant.orderDelivery({
-  time: 22.3,
-  address: "old street, kumaramangalam",
-  mainMenuIndex: 2,
-  starterMenuIndex: 2,
-});
+//////Spread Operator/////
+const arr = [1, 2, 3];
+console.log(arr);
+const badNewArr = [4, 5, arr[0], arr[1], arr[2]];
+console.log(badNewArr);
 
-restaurant.orderDelivery({
-  address: "old street, kumaramangalam",
-  starterMenuIndex: 2,
-});
+const newArr = [4, 5, ...arr];
+console.log(newArr);
+
+const newMenu = [...restaurant.mainMenu, "Fried Rice"];
+console.log(newMenu);
+
+const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(menu);
+
+//Iterables: Array,strings,maps,sets. Not objects
+const str = "Kirubha";
+const letters = [...str, "", "S."];
+console.log(letters);
+
+const newRestaurant = { ...restaurant, foundedIn: 1997, founder: "Kirubha" };
+console.log(newRestaurant);
+
+//Destructuring
+
+//Spread, because on RIGHT side of =
+const spArr = [1, 2, ...[3, 4]];
+console.log(spArr);
+
+//Rest,because on LEFT side of =
+const [a, b, ...c] = [1, 2, 3, 4, 5];
+console.log(a, b, c);
+
+const [Pizza, , Risotto, ...othersFoods] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+
+console.log(Pizza, Risotto, othersFoods);
+
+//Objects
+const { fri, ...weekDays } = { ...restaurant.openingHours };
+console.log(fri);
+console.log(weekDays);
+
+//Functions
+
+const add = (...numbers) => {
+  let sum = 0;
+  for (let i = 0; i <= numbers.length - 1; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+
+add(1, 2, 3);
+add(1, 2, 3, 4, 5);
+add(1, 2, 3, 4, 5, 6, 7);
+
+const x = [2, 4, 6];
+add(...x);
+
+restaurant.orderPizza("mushroom", "onion", "chicken");
+restaurant.orderPizza("mushroom");
+
+///////////OR////////////
+console.log(3 || "Kirubha");
+console.log("" || "Kirubha");
+console.log(true || 0);
+console.log(undefined || null);
+console.log(undefined || 0 || "" || "Kirubha" || 23 || null);
+
+//restaurant.numGuests = 0;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+///////////AND////////////
+console.log(0 && "Kirubha");
+console.log(7 && "Kirubha");
+console.log("Kirubha" && 7 && null && "karan");
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza("mushroom", "spinash");
+}
+
+restaurant.orderPizza && restaurant.orderPizza("mushrooms");
+
+//Nullish : null or undefined (NOT 0 or '')
+const guests3 = restaurant.numGuests ?? 10;
+console.log(guests3);
+
+// Logical Assignment Operators
+const rest1 = {
+  name: "Capri",
+  numGuests: 20,
+};
+
+const rest2 = {
+  name: "La Pizza",
+  owner: "Rossi",
+};
+
+// rest1.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 20;
+
+rest1.numGuests ||= 10;
+rest2.numGuests ||= 20;
+
+console.log(rest1);
+console.log(rest2);
+
+// restaurant.orderDelivery({
+//   time: 22.3,
+//   address: "old street, kumaramangalam",
+//   mainMenuIndex: 2,
+//   starterMenuIndex: 2,
+// });
+
+// restaurant.orderDelivery({
+//   address: "old street, kumaramangalam",
+//   starterMenuIndex: 2,
+// });
 
 /*
 
@@ -119,29 +237,3 @@ const [p = 1, q = 1, r = 0] = [7, 8];
 console.log(p, q, r);
 
 */
-
-const monica = {
-  firstName: "Monica",
-  lastName: "Belluci",
-  age: 27,
-  friends: ["Alice", "Bob"],
-};
-
-// const monicaCopy = monica;
-// monicaCopy.lastName = "Jessi";
-// console.log(monica);
-// console.log(monicaCopy);
-
-//Shallow copy
-// const monicaCopy = { ...monica };
-// monicaCopy.lastName = "Jesse";
-// monicaCopy.friends.push("Varadha");
-// console.log(monica);
-// console.log(monicaCopy);
-
-//Deep Copy
-const monicaCopy = structuredClone(monica);
-monicaCopy.lastName = "Jesse";
-monicaCopy.friends.push("Varadha");
-console.log(monica);
-console.log(monicaCopy);
