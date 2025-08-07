@@ -1,3 +1,5 @@
+"use strict";
+
 // Data needed for first part of the section
 const openingHours = {
   thu: {
@@ -19,7 +21,7 @@ const restaurant = {
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
   mainMenu: ["Pizza", "Pasta", "Risotto"],
-  opencingHours,
+  openingHours,
   order(starterMenuIndex, mainMenuIndex) {
     return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
   },
@@ -39,6 +41,7 @@ const restaurant = {
   },
 };
 
+/*
 //Object keys,values and entries
 
 //Keys
@@ -63,6 +66,7 @@ const entries = Object.entries(openingHours);
 for (const [key, { open, close }] of entries) {
   console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
+*/
 
 /*
 //Optional Chaining
@@ -289,3 +293,89 @@ for (const [i, el] of menu.entries()) {
 }
 
 */
+
+/*
+//Set
+const orderSet = new Set(["Pizza", "Pizza", "Burger", "Burger", "cake", "bun"]);
+console.log(orderSet);
+
+console.log(new Set("Jonas"));
+
+console.log(orderSet.size);
+console.log(orderSet.has("Pizza"));
+console.log(orderSet.has("Bread"));
+orderSet.add("Garlic Bread");
+console.log(orderSet);
+orderSet.delete("bun");
+//orderSet.clear();
+console.log(orderSet);
+
+for (const order of orderSet) {
+  console.log(order);
+}
+
+const staff = ["Waiter", "Chef", "Waiter", "Manager", "Chef", "Waiter"];
+const uniqueStaff = [...new Set(staff)];
+console.log(uniqueStaff);
+
+console.log(new Set(staff).size);
+console.log(new Set("kirubhakaran").size);
+*/
+
+/*
+///Set Method
+
+const italianFoods = new Set([
+  "pasta",
+  "gnocchi",
+  "tomatoes",
+  "olive oil",
+  "garlic",
+  "basil",
+]);
+
+const mexicanFoods = new Set([
+  "tortillas",
+  "beans",
+  "rice",
+  "tomatoes",
+  "avocado",
+  "garlic",
+]);
+
+//New Operations to make set useful
+//Intersection
+const commomFoods = italianFoods.intersection(mexicanFoods);
+console.log([...commomFoods]);
+
+//Union
+const italianMexiconFusion = italianFoods.union(mexicanFoods);
+console.log([...italianMexiconFusion]);
+
+//Difference
+const uniqueItalianFoods = italianFoods.difference(mexicanFoods);
+console.log([...uniqueItalianFoods]);
+
+const uniqueMexicanFoods = mexicanFoods.difference(italianFoods);
+console.log([...uniqueMexicanFoods]);
+
+const uniqueItalianAndMexicanFoods =
+  italianFoods.symmetricDifference(mexicanFoods);
+console.log([...uniqueItalianAndMexicanFoods]);
+*/
+
+//Map Method
+const rest = new Map();
+rest.set("name", "Varadha");
+rest.set(1, "chennai");
+rest.set(2, "villupuram");
+
+rest
+  .set("categories", ["veg", "non veg"])
+  .set(true, "We are open : D")
+  .set(false, "We are closed : D")
+  .set("open", 11)
+  .set("close", 23);
+
+const time = 8;
+console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
