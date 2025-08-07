@@ -1,28 +1,29 @@
 // Data needed for first part of the section
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
 const restaurant = {
   name: "Classico Italiano",
   location: "Via Angelo Tavanti 23, Firenze, Italy",
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
   mainMenu: ["Pizza", "Pasta", "Risotto"],
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
-  order: function (starterMenuIndex, mainMenuIndex) {
+  opencingHours,
+  order(starterMenuIndex, mainMenuIndex) {
     return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
   },
-  orderDelivery: function ({
+  orderDelivery({
     starterMenuIndex,
     mainMenuIndex = 0,
     time = "20:00",
@@ -32,11 +33,49 @@ const restaurant = {
       `Order received! ${this.starterMenu[starterMenuIndex]} and ${this.mainMenu[mainMenuIndex]} will be delivered to ${address} at ${time}`
     );
   },
-  orderPizza: function (mainIngredient, ...otherIngredient) {
+  orderPizza(mainIngredient, ...otherIngredient) {
     console.log(mainIngredient);
     console.log(otherIngredient);
   },
 };
+
+//Object keys,values and entries
+
+//Keys
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+let openStr = `We are open on ${properties.length} days: `;
+
+for (const day of Object.keys(openingHours)) {
+  openStr += `${day},`;
+}
+
+console.log(openStr);
+
+//Values
+const values = Object.values(openingHours);
+console.log(values);
+
+//Entries
+const entries = Object.entries(openingHours);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
+
+/*
+//Optional Chaining
+console.log(restaurant?.openingHours?.mon?.open);
+
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? "closed";
+  console.log(`On ${day}, we open at ${open}`);
+}
+*/
+
+/*
 
 //////Spread Operator/////
 const arr = [1, 2, 3];
@@ -164,6 +203,8 @@ console.log(rest2);
 //   starterMenuIndex: 2,
 // });
 
+*/
+
 /*
 
 /////////////Destructuring Objects///////////////
@@ -235,5 +276,16 @@ console.log(i, j, k);
 
 const [p = 1, q = 1, r = 0] = [7, 8];
 console.log(p, q, r);
+
+*/
+
+/*
+//Array for-of loop
+const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(menu);
+
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1} : ${el}`);
+}
 
 */
