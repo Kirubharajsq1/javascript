@@ -3,6 +3,7 @@
 //==============Start of Datatypes=============/
 
 //Primitive Datatype
+console.log("===========Primitive Data Type=========");
 console.log(typeof 23);
 console.log(typeof "Kirubha");
 console.log(typeof true);
@@ -12,6 +13,7 @@ console.log(typeof BigInt(123456789));
 console.log(typeof Symbol("Kirubha"));
 
 //Objects
+console.log("===========Objects=========");
 let kirubha = {
   name: "Kirubha",
   birthYear: 1997,
@@ -25,6 +27,7 @@ console.log(typeof kirubha);
 //==============End of Datatypes=============/
 
 //==============Start of Assinment Operator=============/
+console.log("===========Assinment Operator=========");
 let ax = 30 + 5;
 let ay = 10;
 ax += 10;
@@ -39,7 +42,7 @@ console.log(ax);
 //==============End of Assinment Operator=============/
 
 //==============Start of Comparison Operator=============/
-
+console.log("===========Comparison Operator=========");
 console.log(10 > 5); //Greater Than
 console.log(10 < 5); // Lesser Than
 console.log(10 >= 10);
@@ -52,6 +55,10 @@ console.log(typeof null);
 //==============End of Comparison Operator=============/
 
 //==============Start of Template literals=============/
+console.log("===========Template literals=========");
+console.log(
+  `Template literals are a way to create strings in JavaScript with enhanced features like multi-line support, variable interpolation, and expression embedding. They are enclosed in backticks  instead of single (') or double (") quotes.`
+);
 
 //Definition : Template literals are a way to create strings in JavaScript with enhanced features like multi-line support, variable interpolation, and expression embedding. They are enclosed in backticks (`) instead of single (') or double (") quotes.
 
@@ -64,6 +71,11 @@ console.log(`I am ${tlFirstName} a ${2025 - tlBirthYear} years old ${tlJob}`);
 //==============End of Template literals=============/
 
 //==============Start of Type Conversion=============/
+
+console.log("===========Template literals=========");
+console.log(
+  "Type conversion in JavaScript refers to changing a value from one data type to another."
+);
 
 //Type conversion in JavaScript refers to changing a value from one data type to another.
 
@@ -199,3 +211,132 @@ setTimeout(function () {
 })();
 
 //============End of Functions==============//
+
+//============Start of Array==============//
+//Definition  : An array in JavaScript is a special type of object used to store multiple values in a single variable. Each value has an index (position), starting from 0.
+
+const kirubhaArr = ["kirubha", 28, 2025 - 1997, "Web Developer"];
+console.log(kirubhaArr);
+
+const thamaraiArr = new Array("thamarai", 27, 2025 - 1998, "weaver");
+console.log(thamaraiArr);
+
+//Basic Array Operations
+
+//Push : add at end
+//Unshift : add at start
+const friends = ["Dharmadurai", "Sowmi"];
+friends.push("kabinesh");
+console.log(friends);
+friends.unshift("saudhesh");
+console.log(friends);
+
+//Pop : remove at end
+//shift: remove at start
+console.log(friends);
+friends.pop();
+console.log(friends);
+friends.shift();
+console.log(friends);
+
+//Position of an element
+console.log(friends.indexOf("Sowmi"));
+
+//Check if element exists or not
+console.log(friends.includes("Sowmi"));
+console.log(friends.includes("kirubha"));
+
+//============End of Array==============//
+
+//============Start of Objects==============//
+const kirubhaObj = {
+  firstName: "Kirubhakaran",
+  lastName: "R",
+  age: 2025 - 1997,
+  job: "Developer",
+  friends: ["Thamarai", "Sowmi", "Dharmadurai"],
+};
+
+//Dot Notation
+console.log(kirubhaObj.age);
+
+//Bracket Notation
+console.log(kirubhaObj["friends"]);
+
+//Objects Methods
+const kirubhaObjct = {
+  firstName: "Kirubhakaran",
+  lastName: "R",
+  birthYear: 1997,
+  job: "Developer",
+  friends: ["Thamarai", "Sowmi", "Dharmadurai"],
+  hasDriversLicense: true,
+  calcAge: function () {
+    this.age = 2025 - this.birthYear;
+    return this.age;
+  },
+  getSummary: function () {
+    return `${this.firstName} is a ${this.calcAge()}-year old ${
+      this.job
+    }, and he has ${this.hasDriversLicense ? "a" : "no"}  a driver's license`;
+  },
+};
+
+console.log(kirubhaObjct.calcAge());
+console.log(kirubhaObjct.age);
+console.log(kirubhaObjct.getSummary());
+//============End of Objects==============//
+
+//============Start of For loop==============//
+let types = [];
+for (let i = 0; i <= kirubhaArr.length - 1; i++) {
+  types.push(typeof kirubhaArr[i]);
+}
+console.log(types);
+//============End of Objects==============//
+
+//============Start of Break & continue==============//
+//Break : The break statement is used to exit a loop immediately, even if the loop condition is still true.
+
+for (let i = 1; i <= 5; i++) {
+  if (i === 3) {
+    break; // stops the loop when i = 3
+  }
+  console.log(i);
+}
+
+//Continue : The continue statement is used to skip the current iteration and move to the next one.
+for (let i = 1; i <= 5; i++) {
+  if (i === 3) {
+    continue; // skip printing 3
+  }
+  console.log(i);
+}
+//============End of Break & continue==============//
+
+//============Start of Backward Loop==============//
+for (let i = kirubhaArr.length - 1; i >= 0; i--) {
+  console.log(kirubhaArr[i]);
+}
+//============End of Backward Loop==============//
+
+//============Start of Nested Loop==============//
+for (let i = 1; i <= 3; i++) {
+  console.log(`-----Excercise ${i}-----`);
+  for (let j = 1; j <= 5; j++) {
+    console.log(`Lifting weights reps ${j}`);
+  }
+}
+//============End of Nested Loop==============//
+
+//============Start of While Loop==============//
+let rep = 1;
+while (rep <= 10) {
+  console.log(`Lifting weights reps ${rep} 🏋️‍♂️`);
+  rep++;
+}
+//============End of While Loop==============//
+
+console.log(Math.trunc(Math.random() * 6) + 1);
+
+//=====================End of Javascript Fundamentals Part-II===============//
