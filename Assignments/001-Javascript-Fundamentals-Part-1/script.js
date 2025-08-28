@@ -14,7 +14,7 @@ let salary = null; //Null
 let education = [
   "sengunthar matric higher secondary school",
   "sengunthar college of engineering",
-]; // Objects
+]; // Objects 
 let number = 1112444444444678976543578884334567899876543234567898764346789876543444445278555552;
 
 
